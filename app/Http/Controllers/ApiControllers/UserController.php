@@ -12,4 +12,8 @@ class UserController extends Controller
     public function index(){
         return UserResource::collection(User::all());
     }
+
+    public function detail($id){
+        return new UserResource(User::find($id));
+    }
 }
