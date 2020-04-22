@@ -23,5 +23,8 @@ Route::namespace('ApiControllers')->group(function(){
     Route::get('users/{id}', 'UserController@detail');
 
     Route::get('posts/', 'PostController@index');
-    Route::get('posts/{id}', 'PostController@detail');
+    Route::get('posts/{id}', 'PostController@show');
+    Route::post('posts/create', 'PostController@store');
+    Route::post('posts/edit/{id}', 'PostController@update');
+    Route::post('posts/delete/{id}', 'PostController@destroy');
 });
