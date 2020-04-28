@@ -18,7 +18,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::namespace('ApiControllers')->group(function(){
+Route::group(['namespace' => 'ApiControllers', 'middleware' => 'auth:api'], function(){
     Route::get('users/', 'UserController@index');
     Route::get('users/{id}', 'UserController@detail');
 
@@ -28,3 +28,12 @@ Route::namespace('ApiControllers')->group(function(){
     Route::post('posts/edit/{id}', 'PostController@update');
     Route::post('posts/delete/{id}', 'PostController@destroy');
 });
+
+Route::group(['namespace' => 'ApiControllers\Auth'], function(){
+    Route::group(['middleware' => 'auth:api'], function(){
+        Route::get('logout/', 'LoginController@logout');
+    });
+    Route::post('login/', 'LoginController@login');
+    Route::post('register/', 'RegisterController@register');
+});
+
