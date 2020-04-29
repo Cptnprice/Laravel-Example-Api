@@ -26,7 +26,6 @@ class PostCreate extends FormRequest
         return [
             'title' => 'required|unique:posts|max:255',
             'content' => 'required',
-            'user_id' => 'required|integer',
         ];
     }
 }

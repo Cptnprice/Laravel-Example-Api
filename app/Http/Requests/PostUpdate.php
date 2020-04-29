@@ -26,7 +26,6 @@ class PostUpdate extends FormRequest
         return [
             'title' => 'unique:posts|max:255',
             'content' => '',
-            'user_id' => 'integer',
         ];
     }
 }
