@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class RoleTableSeeder extends Seeder
 {
@@ -12,6 +13,7 @@ class RoleTableSeeder extends Seeder
      */
     public function run()
     {
-        Role::create(["name" => "editor"]);
+        $role = Role::create(["name" => "editor"]);
+        $role->givePermissionTo(["edit posts", "delete posts"]);
     }
 }

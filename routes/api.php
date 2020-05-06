@@ -25,8 +25,10 @@ Route::group(['namespace' => 'ApiControllers', 'middleware' => 'auth:api'], func
     Route::get('posts/', 'PostController@index');
     Route::get('posts/{id}', 'PostController@show');
     Route::post('posts/create', 'PostController@store');
-    Route::post('posts/edit/{id}', 'PostController@update');
-    Route::post('posts/delete/{id}', 'PostController@destroy');
+    Route::group(["middleware" => "role:editor"], function(){
+        Route::post('posts/edit/{id}', 'PostController@update');
+        Route::post('posts/delete/{id}', 'PostController@destroy');
+    });
 });
 
 Route::group(['namespace' => 'ApiControllers\Auth'], function(){

@@ -34,7 +34,7 @@ class PostController extends Controller
     public function update($id, PostUpdate $request){
         $validated = $request->validated();
         $post = Post::findOrFail($id);
-        if (Auth::user()->id != $post->user->id){
+        if ((Auth::user()->id != $post->user->id) && !Auth::user()->hasRole("editor")){
             return response(['message' => 'You are not author of this post. You can\'t edit it']);
         }
         else{
@@ -48,7 +48,7 @@ class PostController extends Controller
 
     public function destroy($id, Request $request){
         $post = Post::findOrFail($id);
-        if (Auth::user()->id != $post->user->id){
+        if ((Auth::user()->id != $post->user->id) && !Auth::user()->hasRole("editor")){
             return response(['message' => 'You are not author of this post. You can\'t delete it']);
         }
         $post->delete();
