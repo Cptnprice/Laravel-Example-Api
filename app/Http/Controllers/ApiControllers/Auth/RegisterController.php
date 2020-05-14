@@ -9,7 +9,7 @@ use App\User;
 
 class RegisterController extends Controller
 {
-    public function registerSingle(RegisterSingleRequest $request){
+    public function register(RegisterSingleRequest $request){
         try{
             $request->merge([
                 'password' => bcrypt(request('password'))

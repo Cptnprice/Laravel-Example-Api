@@ -1,21 +1,21 @@
 <?php
 
-namespace App\Http\Controllers\ApiControllers\Auth;
+namespace App\Http\Controllers\ApiControllers\Auth\Company;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Http\Requests\LoginSingleRequest;
+use App\Http\Requests\LoginCompanyRequest;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
-use App\User;
+use App\Company;
 
 class LoginController extends Controller
 {
-    public function login(LoginSingleRequest $request){
-        $user = User::where('email', request('email'))->first();
+    public function login(LoginCompanyRequest $request){
+        $company = Company::where('email', request('email'))->first();
         
-        if(!$user){
-            return response(['message' => "No such user"]);
+        if(!$company){
+            return response(['message' => "No such company"]);
         }
 
         $credentials = request(['email', 'password']);
@@ -23,8 +23,8 @@ class LoginController extends Controller
             return response(['message' => 'Incorrect password or email']);
         }
 
-        $user = auth()->user();
-        $tokenResult = $user->createToken('authToken');
+        $company = auth()->user();
+        $tokenResult = $company->createToken('authToken');
         $token = $tokenResult->token;
 
         $token->save();
@@ -35,7 +35,7 @@ class LoginController extends Controller
                 $tokenResult->token->expires_at
             )->toDateTimeString(),
         ];
-        return response(['message' => 'User logged in successfully', 'data' => $data]);
+        return response(['message' => 'Company logged in successfully', 'data' => $data]);
     }
 
     public function logout(Request $request){
