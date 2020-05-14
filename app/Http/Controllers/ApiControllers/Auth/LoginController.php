@@ -4,14 +4,14 @@ namespace App\Http\Controllers\ApiControllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Http\Requests\LoginRequest;
+use App\Http\Requests\LoginSingleRequest;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use App\User;
 
 class LoginController extends Controller
 {
-    public function login(LoginRequest $request){
+    public function loginSingle(LoginSingleRequest $request){
         $user = User::where('email', request('email'))->first();
         
         if(!$user){
@@ -38,7 +38,7 @@ class LoginController extends Controller
         return response(['message' => 'User logged in successfully', 'data' => $data]);
     }
 
-    public function logout(Request $request){
+    public function logoutSingle(Request $request){
         $request->user()->token()->revoke();
 
         return response()->json([

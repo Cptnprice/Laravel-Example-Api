@@ -4,12 +4,12 @@ namespace App\Http\Controllers\ApiControllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Http\Requests\RegisterRequest;
+use App\Http\Requests\RegisterSingleRequest;
 use App\User;
 
 class RegisterController extends Controller
 {
-    public function register(RegisterRequest $request){
+    public function registerSingle(RegisterSingleRequest $request){
         try{
             $request->merge([
                 'password' => bcrypt(request('password'))
