@@ -24,7 +24,10 @@ class RegisterCompanyRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => 'required|unique:companies',
+            'identification_number' => 'required|min:5',
+            'email' => 'required|email',
+            'password',
         ];
     }
 }

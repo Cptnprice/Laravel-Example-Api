@@ -19,11 +19,11 @@ class LoginController extends Controller
         }
 
         $credentials = request(['email', 'password']);
-        if (!Auth::attempt($credentials)) {
+        if (!Auth::guard('company')->attempt($credentials)) {
             return response(['message' => 'Incorrect password or email']);
         }
 
-        $company = auth()->user();
+        $company = Auth::guard('company')->user();
         $tokenResult = $company->createToken('authToken');
         $token = $tokenResult->token;
 
@@ -39,10 +39,11 @@ class LoginController extends Controller
     }
 
     public function logout(Request $request){
-        $request->user()->token()->revoke();
+        $company = Auth::guard('company')->user();
+        $company->token()->revoke();
 
         return response()->json([
-            'message' => 'Successfully logged out',
+            'message' => 'Company successfully logged out',
         ]);
     }
 }
