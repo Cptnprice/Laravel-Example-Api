@@ -48,7 +48,7 @@ return [
         ],
 
         'company' => [
-            'driver' => 'session',
+            'driver' => 'passport',
             'provider' => 'companies',
         ]
     ],

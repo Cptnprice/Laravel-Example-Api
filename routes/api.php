@@ -33,7 +33,7 @@ Route::group(['namespace' => 'ApiControllers', 'middleware' => 'auth:api'], func
 
 Route::group(['namespace' => 'ApiControllers\Auth'], function(){
     Route::group(['middleware' => 'auth:api'], function(){
-        Route::get('logout/', 'LoginController@logout');
+        Route::post('logout/single', 'LoginController@logout');
     });
     Route::post('login/single', 'LoginController@login');
     Route::post('register/single', 'RegisterController@register');
@@ -41,6 +41,7 @@ Route::group(['namespace' => 'ApiControllers\Auth'], function(){
     Route::group(['namespace' => 'Company'], function(){
         Route::post('login/company', 'LoginController@login');
         Route::post('register/company', 'RegisterController@register');
+        Route::post('logout/company', 'LoginController@logout');
     });
 });
 
