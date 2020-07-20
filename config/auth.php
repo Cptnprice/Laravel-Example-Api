@@ -47,10 +47,10 @@ return [
             'hash' => false,
         ],
 
-        'company' => [
-            'driver' => 'passport',
-            'provider' => 'companies',
-        ]
+        // 'company' => [
+        //     'driver' => 'passport',
+        //     'provider' => 'companies',
+        // ]
     ],
 
     /*
